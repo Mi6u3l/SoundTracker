@@ -7,7 +7,7 @@
   <% include partials/player.ejs %>
   <% }) %>
   <% } else {%>
-  <div class="empty-page favourites"><div class="empty-page-text">Who would you like to listen next? Add next songs to play and find them here.</div></div>
+  <div class="empty-page-text">Who would you like to listen next? Add next songs to play and find them here.</div>
   <% } %>
 </div>
  <script
@@ -16,16 +16,7 @@
     src="https://maps.googleapis.com/maps/api/js?v=3.20&key=AIzaSyDHylimdPIr0Lfc6WzCjS47B7mrNrTQSJ0">
 </script>
 <script>
-setTimeout(function() {
-  if ($('.empty-page').length > 0) {
-    $('body').css('margin-bottom','0px');
-    $('.container').css('padding-left', '0px');
-    $('.container').css('padding-right', '0px');
-    $('#pagecontainer').removeClass('page');
-    $('#pagecontainer').addClass('emptypage');
-    $('footer').css('bottom', '20px');
-}
-}, 100);  
+ 
 setTimeout(function(){
     for (var property in initializeMaps) {
       initializeMaps[property]();

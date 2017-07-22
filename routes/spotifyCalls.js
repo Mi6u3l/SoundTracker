@@ -4,6 +4,7 @@ const router = express.Router();
 const User = require("../models/user");
 const Song = require("../models/song");
 const dotenv = require("dotenv").config();
+const axios = require("axios");
 
 const SpotifyWebApi = require('spotify-web-api-node');
 
@@ -183,51 +184,42 @@ function checkDuplicateLists(database,add){
      }
      return returnArray;
    }
+
    router.get("/followed",(req,res,next) => {
      let username = req.user.username;
      let allAlbums = [];
      User.findOne({username},(err,user) => {
        let followingArtists = user.artists;
        if(followingArtists.length === 0){
-         res.render("followed", {username: req.user.username, myArray : []} );
-       }
-       else{
-         for(var i = 0,k = 0;i<followingArtists.length;i++){
-           let myAlbum = [];
-           spotifyApi.getArtistAlbums(followingArtists[i])
-             .then(function(data) {
+         res.render("followed", {username: req.user.username, allAlbums} );
+       } else {
+      var promises = [];
+       followingArtists.forEach((artist) => {
+         promises.push(
+           spotifyApi.getArtistAlbums(artist)
+             .then(function(data) {  
+               let myAlbum = [];
                let result = data.body.items;
                result.forEach((element) => {
-                 console.log("THIS IS MY ELEMENT");
-                 console.log(element);
                    let myObject = {};
                    myObject.image = element.images[0].url;
                    myObject.name = element.name;
                    myObject.id = element.id;
                    myAlbum.unshift(myObject);
-
                });
-              allAlbums.unshift(myAlbum);
-
-               k++;
-               if(k === followingArtists.length){
-                 allAlbums = parseArtists(allAlbums);
-                 doneLoopingArtists(allAlbums);
-               }
+              allAlbums.unshift(myAlbum);  
              }, function(err) {
-               console.error(err);
-            });
-        }
-       }
-
-    });
-
-    function doneLoopingArtists(myArray){
-      console.log(myArray);
-      res.render("followed", {username: req.user.username, myArray });
+               console.log(err);     
+            }));
+       });
+       axios.all(promises).then(function(data) {
+        res.render("followed", {username: req.user.username, allAlbums });
+       });
     }
-
-   });
+  });
+ });
+   
+   
 
    router.get("/followed/individual",(req,res,next) => {
      let albumId = req.query.albumId;

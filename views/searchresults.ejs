@@ -1,5 +1,4 @@
 <div class="page container">
-    <h2>Results</h2>
     <% allSongs.forEach((song) => { %>
        <form action="/playsingle" method="POST">
             <input type="hidden" name="preview" value="<%= song.preview_url %>">
