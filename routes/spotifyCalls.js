@@ -98,7 +98,7 @@ function checkDuplicateLists(database,add){
         allSongs = parseSongs(allSongs);
         res.render("searchresults", {allSongs, username: req.user.username});
       }, function(err) {
-        console.error(err);
+        return next(err);
       });
   });
 
@@ -106,7 +106,6 @@ function checkDuplicateLists(database,add){
   router.post("/favourites/new",(req,res,next) =>{
     let username = req.user.username;
     let action = "added to";
-    console.log('songimage', req.body.info.songImage);
     const songObject = {
       name: req.body.info.songName,
       image: req.body.info.songImage,
@@ -172,7 +171,6 @@ function checkDuplicateLists(database,add){
       res.end('{"success" : "Updated Successfully", "status" : 200, "action": "added to"}');
     }
     else{
-      console.log("it's correct");
       res.end('{"success" : "Updated Successfully", "status" : 200, "action": "deleted from"}');
     }
   });
@@ -209,7 +207,7 @@ function checkDuplicateLists(database,add){
                });
               allAlbums.unshift(myAlbum);  
              }, function(err) {
-               console.log(err);     
+               return next(err);
             }));
        });
        axios.all(promises).then(function(data) {
@@ -238,7 +236,7 @@ function checkDuplicateLists(database,add){
          });
          res.render("songsalbum", { tracksArray, username: req.user.username });
        }, function(err) {
-         console.log('Something went wrong!', err);
+         return next(err);
      });
    });
 

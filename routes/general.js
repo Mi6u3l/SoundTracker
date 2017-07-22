@@ -93,9 +93,6 @@ router.post("/playsingle", ensureLogin.ensureLoggedIn(), (req,res,next) => {
                   if(err){
                     return next(err);
                   }
-                  else{
-                    console.log("updated");
-                  }
                 });
               }
 
@@ -105,7 +102,7 @@ router.post("/playsingle", ensureLogin.ensureLoggedIn(), (req,res,next) => {
         }));
 
     } else {
-      console.log(error);
+      return next(err)
     }
   }));
 });
@@ -121,8 +118,6 @@ router.get("/favorites",  ensureLogin.ensureLoggedIn(),(req,res,next) => {
      }
      else{
        favourites = user.favourites;
-       console.log('favourites', favourites);
-       console.log(user.favourites);
        res.render("favorites", {username: req.user.username, favourites });
      }
    });
