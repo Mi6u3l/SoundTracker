@@ -1,13 +1,15 @@
 <div class="page container">
-  <div class="songs-album">
+    <div class="songs-album">
         <% tracksArray.forEach((element) => { %>
             <div class="player-info">
-                    <div class=""><%= element.name %></div>
+                <div class="">
+                    <%= element.name %>
+                </div>
             </div>
             <audio class="audio" src="<%= element.previewUrl %>" controls="">
-                        Your browser does not support the audio element.
+                Your browser does not support the audio element.
             </audio>
 
-        <% }) %>
+            <% }) %>
     </div>
 </div>

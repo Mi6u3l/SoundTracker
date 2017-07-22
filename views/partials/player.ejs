@@ -1,173 +1,192 @@
 <div class="player">
     <div class="player-image">
-        <img  src="<%= song.image %>" />
+        <img src="<%= song.image %>" />
     </div>
     <div class="player-audio">
-         <div class="player-info">
-             <div class="player-info-artist"><%= artistInfo.name %></div>
-             <div class=""><%= song.name %></div>
+        <div class="player-info">
+            <div class="player-info-artist">
+                <%= artistInfo.name %>
+            </div>
+            <div class="">
+                <%= song.name %>
+            </div>
         </div>
         <audio class="audio" src="<%= song.previewUrl %>" controls="">
-                Your browser does not support the audio element.
+            Your browser does not support the audio element.
         </audio>
         <div class="player-options">
             <div><a href="#" onclick="return saveToFavorite('<%= JSON.stringify(song) %>','<%= JSON.stringify(artistInfo) %>','<%= artistBio %>')"><img class="player-options-icon" src="/images/like.png"/>Add to favourites</a></div>
-            <div><a href="#" onclick="return saveToQueue('<%= JSON.stringify(song) %>','<%= JSON.stringify(artistInfo) %>','<%= artistBio %>')" ><img class="player-options-icon" src="/images/plus-sign-to-add.png"/> Add to queue </a></div>
+            <div><a href="#" onclick="return saveToQueue('<%= JSON.stringify(song) %>','<%= JSON.stringify(artistInfo) %>','<%= artistBio %>')"><img class="player-options-icon" src="/images/plus-sign-to-add.png"/> Add to queue </a></div>
             <div><a href="#" onclick="return saveToFollowingArtists('<%= artistInfo.id %>')"><img class="player-options-icon" src="/images/followartist.png"/>Follow this artist </a></div>
-            <div><a class="openmodal" href="#<%= artistInfo.id %>" data-toggle="modal" ><img class="player-options-icon" src="/images/artistinfo.png"/>Artist info</a></div>
+            <div><a class="openmodal" href="#<%= artistInfo.id %>" data-toggle="modal"><img class="player-options-icon" src="/images/artistinfo.png"/>Artist info</a></div>
             <button class="play-twitter" id="shareable_<%= artistInfo.id %>"></button>
         </div>
     </div>
 </div>
 
- <div class="artist-modal modal fade"  id="<%= artistInfo.id %>" role="dialog" >
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content" id="back" >
-                    <div class="modal-header">
-                    <h4>Artist Details<h4>
-                </div>
-                <div class="modal-body">
-                    <p><b>Name:</b> <%=artistInfo.name %></p>
-                    <p><b>Bio:</b> <%=artistBio %></p>
-                    <p><b><%=artistInfo.locationLabel %>:</b> <%=artistInfo.location %></p>
-                    <div id="map_<%= artistInfo.id %>" class="artist-map"></div>
-                </div>
-                <div class="modal-footer">
-                    <a id="shareable_<%= artistInfo.id %>" class="btn btn-default" data-dismiss="modal">Close</a>
-                </div>
+<div class="artist-modal modal fade" id="<%= artistInfo.id %>" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" id="back">
+            <div class="modal-header">
+                <h4>Artist Details
+                    <h4>
             </div>
-      </div>
+            <div class="modal-body">
+                <p><b>Name:</b>
+                    <%=artistInfo.name %>
+                </p>
+                <p><b>Bio:</b>
+                    <%=artistBio %>
+                </p>
+                <p><b><%=artistInfo.locationLabel %>:</b>
+                    <%=artistInfo.location %>
+                </p>
+                <div id="map_<%= artistInfo.id %>" class="artist-map"></div>
+            </div>
+            <div class="modal-footer">
+                <a id="shareable_<%= artistInfo.id %>" class="btn btn-default" data-dismiss="modal">Close</a>
+            </div>
+        </div>
+    </div>
 </div>
 <script>
-
-setTimeout(function(){
-twttr.widgets.createShareButton(
-  '/',
-  document.getElementById('shareable_<%= artistInfo.id %>'),
-  {
-    count: 'none',
-    text: 'Check out what I found on Sound Tracker <%= song.previewUrl %>'
-  }).then(function (el) {
-    console.log("Button created.")
-  });
-}, 500);
+    setTimeout(function () {
+        twttr.widgets.createShareButton(
+            '/',
+            document.getElementById('shareable_<%= artistInfo.id %>'), {
+                count: 'none',
+                text: 'Check out what I found on Sound Tracker <%= song.previewUrl %>'
+            }).then(function (el) {
+            console.log("Button created.")
+        });
+    }, 500);
 
 
-function saveToFavorite(song, artistInfo, artistBio) {
-    song = JSON.parse(song);
-    artistInfo = JSON.parse(artistInfo);
-    const info = {
-        songName: song.name,
-        songImage: song.image,
-        songId: song.id,
-        songPreviewUrl: song.previewUrl,
-        artistId: artistInfo.id,
-        artistName: artistInfo.name,
-        artistBio: artistBio,
-        artistLocation: artistInfo.location,
-        artistLocationLabel: artistInfo.locationLabel,
+    function saveToFavorite(song, artistInfo, artistBio) {
+        song = JSON.parse(song);
+        artistInfo = JSON.parse(artistInfo);
+        const info = {
+            songName: song.name,
+            songImage: song.image,
+            songId: song.id,
+            songPreviewUrl: song.previewUrl,
+            artistId: artistInfo.id,
+            artistName: artistInfo.name,
+            artistBio: artistBio,
+            artistLocation: artistInfo.location,
+            artistLocationLabel: artistInfo.locationLabel,
 
 
-    };
-      $.ajax({
-        method:  'POST',
-        url:     '/favourites/new/',
-        'Content-Type': 'application/x-www-form-urlencoded',
-        data: { info: info },
-        success: function(data) {
-          result = JSON.parse(data);
-            toastr.success('Song '+result.action+ ' favourites.');
-        },
-        error:   function(data) {
+        };
+        $.ajax({
+            method: 'POST',
+            url: '/favourites/new/',
+            'Content-Type': 'application/x-www-form-urlencoded',
+            data: {
+                info: info
+            },
+            success: function (data) {
+                result = JSON.parse(data);
+                toastr.success('Song ' + result.action + ' favourites.');
+            },
+            error: function (data) {
 
-        }
-  });
-
-  return false;
-}
-
-function saveToQueue(song, artistInfo, artistBio) {
-    song = JSON.parse(song);
-    artistInfo = JSON.parse(artistInfo);
-    const info = {
-        songName: song.name,
-        songImage: song.image,
-        songId: song.id,
-        songPreviewUrl: song.previewUrl,
-        artistId: artistInfo.id,
-        artistName: artistInfo.name,
-        artistBio: artistBio,
-        artistLocation: artistInfo.location,
-        artistLocationLabel: artistInfo.locationLabel,
-
-
-    };
-      $.ajax({
-        method:  'POST',
-        url:     '/queue/new',
-        'Content-Type': 'application/x-www-form-urlencoded',
-        data: { info: info },
-        success: function(data) {
-          result = JSON.parse(data);
-            toastr.success('Song '+result.action+ ' queue.');        },
-        error:   function(data) {
-
-        }
-  });
-    return false;
-}
-
-function saveToFollowingArtists(artistId) {
-    const info = {
-        artistId: artistId,
-    };
-      $.ajax({
-        method:  'POST',
-        url:     '/artist/new/',
-        'Content-Type': 'application/x-www-form-urlencoded',
-        data: { info: info },
-        success: function(data) {
-          result = JSON.parse(data);
-            toastr.success('Now '+result.action+ ' artist.');        },
-        error:   function(data) {
-        }
-  });
-    return false;
-}
-
-setTimeout(function(){ $('#<%= artistInfo.id %>').on('shown.bs.modal', function () {
-    google.maps.event.trigger(map["<%= artistInfo.id %>"], "resize");
-    map["<%= artistInfo.id %>"].panTo(marker["<%= artistInfo.id %>"].getPosition());
-}); }, 1000);
-
-setTimeout(function(){
-initializeMaps["<%= artistInfo.id %>"] = function() {
-    map["<%= artistInfo.id %>"] = new google.maps.Map(document.getElementById('map_<%= artistInfo.id %>'), {
-        zoom: 4
-    });
-    var geocoder = new google.maps.Geocoder();
-        setGeoCoder["<%= artistInfo.id %>"](geocoder, map["<%= artistInfo.id %>"]);
-
- }
-}, 500);
-
-setTimeout(function(){
-setGeoCoder["<%= artistInfo.id %>"] = function (geocoder, resultsMap) {
-        var address = '<%= artistInfo.location %>'
-        geocoder.geocode({'address': address}, function(results, status) {
-            if (status === 'OK') {
-            resultsMap.setCenter(results[0].geometry.location);
-            marker["<%= artistInfo.id %>"] = new google.maps.Marker({
-                map: resultsMap,
-                position: results[0].geometry.location
-            });
-
-            } else {
-            alert('Geocode was not successful for the following reason: ' + status);
             }
         });
+
+        return false;
     }
-}, 500);
+
+    function saveToQueue(song, artistInfo, artistBio) {
+        song = JSON.parse(song);
+        artistInfo = JSON.parse(artistInfo);
+        const info = {
+            songName: song.name,
+            songImage: song.image,
+            songId: song.id,
+            songPreviewUrl: song.previewUrl,
+            artistId: artistInfo.id,
+            artistName: artistInfo.name,
+            artistBio: artistBio,
+            artistLocation: artistInfo.location,
+            artistLocationLabel: artistInfo.locationLabel,
 
 
+        };
+        $.ajax({
+            method: 'POST',
+            url: '/queue/new',
+            'Content-Type': 'application/x-www-form-urlencoded',
+            data: {
+                info: info
+            },
+            success: function (data) {
+                result = JSON.parse(data);
+                toastr.success('Song ' + result.action + ' queue.');
+            },
+            error: function (data) {
+
+            }
+        });
+        return false;
+    }
+
+    function saveToFollowingArtists(artistId) {
+        const info = {
+            artistId: artistId,
+        };
+        $.ajax({
+            method: 'POST',
+            url: '/artist/new/',
+            'Content-Type': 'application/x-www-form-urlencoded',
+            data: {
+                info: info
+            },
+            success: function (data) {
+                result = JSON.parse(data);
+                toastr.success('Now ' + result.action + ' artist.');
+            },
+            error: function (data) {}
+        });
+        return false;
+    }
+
+    setTimeout(function () {
+        $('#<%= artistInfo.id %>').on('shown.bs.modal', function () {
+            google.maps.event.trigger(map["<%= artistInfo.id %>"], "resize");
+            map["<%= artistInfo.id %>"].panTo(marker["<%= artistInfo.id %>"].getPosition());
+        });
+    }, 1000);
+
+    setTimeout(function () {
+        initializeMaps["<%= artistInfo.id %>"] = function () {
+            map["<%= artistInfo.id %>"] = new google.maps.Map(document.getElementById(
+                'map_<%= artistInfo.id %>'), {
+                zoom: 4
+            });
+            var geocoder = new google.maps.Geocoder();
+            setGeoCoder["<%= artistInfo.id %>"](geocoder, map["<%= artistInfo.id %>"]);
+
+        }
+    }, 500);
+
+    setTimeout(function () {
+        setGeoCoder["<%= artistInfo.id %>"] = function (geocoder, resultsMap) {
+            var address = '<%= artistInfo.location %>'
+            geocoder.geocode({
+                'address': address
+            }, function (results, status) {
+                if (status === 'OK') {
+                    resultsMap.setCenter(results[0].geometry.location);
+                    marker["<%= artistInfo.id %>"] = new google.maps.Marker({
+                        map: resultsMap,
+                        position: results[0].geometry.location
+                    });
+
+                } else {
+                    alert('Geocode was not successful for the following reason: ' + status);
+                }
+            });
+        }
+    }, 500);
 </script>

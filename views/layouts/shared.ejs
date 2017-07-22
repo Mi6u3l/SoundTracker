@@ -1,61 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Sound Tracker</title>
-    <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
-    <link rel="stylesheet" type="text/css" href="/stylesheets/stickyfooter.css">
-    <link rel="stylesheet" type="text/css" href="/bower_components/components-font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="/stylesheets/player.css">
-    <link rel="stylesheet" type="text/css" href="/stylesheets/authentication.css">
-    <link rel="stylesheet" type="text/css" href="/bower_components/toastr/toastr.min.css">
-  </head>
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-        <div class="header-wrapper">
-        <div class="title">
-          <a class="navbar-brand" href="/"><img class="logo" src="/images/logo.png" /></a>
-        </div>
-         <% if (locals.username) { %>
+
+<head>
+  <title>Sound Tracker</title>
+  <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+  <link rel="stylesheet" type="text/css" href="/stylesheets/stickyfooter.css">
+  <link rel="stylesheet" type="text/css" href="/bower_components/components-font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="/stylesheets/player.css">
+  <link rel="stylesheet" type="text/css" href="/stylesheets/authentication.css">
+  <link rel="stylesheet" type="text/css" href="/bower_components/toastr/toastr.min.css">
+</head>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="header-wrapper">
+      <div class="title">
+        <a class="navbar-brand" href="/"><img class="logo" src="/images/logo.png" /></a>
+      </div>
+      <% if (locals.username) { %>
         <div class="custom-search-input">
-                <div class="search-box input-group col-md-12">
-                    <input id="inputSearch" type="text" class="form-control input-lg" placeholder="Search a song, an artist, or album..." onkeypress="handle(event)" >
-                    <span class="input-group-btn">
+          <div class="search-box input-group col-md-12">
+            <input id="inputSearch" type="text" class="form-control input-lg" placeholder="Search a song, an artist, or album..." onkeypress="handle(event)">
+            <span class="input-group-btn">
                         <buttonn id="btnSearch" class="btn btn-info btn-lg search-button" type="button">
                             <i class="glyphicon glyphicon-search"></i>
                         </button>
                     </span>
-                </div>
-                <div class="menu">
-                  <div><a href="/history">History</a></div>
-                  <div><a href="/favorites">Favourites</a></div>
-                  <div><a href="/queue">Queue</a></div>
-                  <div><a href="/followed">Following</a></div>
-                </div>
-                <div class="logged-user"><img class="user-icon" src="/images/personalprofileicon.png"/>Hello, <%= username %><a href="/logout"><img class="logout-icon" src="/images/logouticon.png"/></a></div>
           </div>
-       
-         
-           <% } else { %>
-           <div class="menu-options">
-            <span>Features</span> 
-            <span>About</span> 
-            <span>Newsletter</span>
-            </div>
-           <% } %>
+          <div class="menu">
+            <div><a href="/history">History</a></div>
+            <div><a href="/favorites">Favourites</a></div>
+            <div><a href="/queue">Queue</a></div>
+            <div><a href="/followed">Following</a></div>
+          </div>
+          <div class="logged-user"><img class="user-icon" src="/images/personalprofileicon.png" />Hello,
+            <%= username %><a href="/logout"><img class="logout-icon" src="/images/logouticon.png"/></a></div>
         </div>
+
+
+        <% } else { %>
+          <div class="menu-options">
+            <span>Features</span>
+            <span>About</span>
+            <span>Newsletter</span>
+          </div>
+          <% } %>
     </div>
-    </nav>
-    <%- body -%>
-     <% if (locals.username) { %>
-     <footer class="footer">
+  </div>
+</nav>
+<%- body -%>
+  <% if (locals.username) { %>
+    <footer class="footer">
       <div class="container">
       </div>
     </footer>
     <% } %>
-    <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/javascripts/general.js"></script>
-    <script type="text/javascript" src="/bower_components/toastr/toastr.min.js"></script>
-    <script type="text/javascript" src="https://platform.twitter.com/widgets.js"></script>
+      <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+      <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="/javascripts/general.js"></script>
+      <script type="text/javascript" src="/bower_components/toastr/toastr.min.js"></script>
+      <script type="text/javascript" src="https://platform.twitter.com/widgets.js"></script>
+
 </html>

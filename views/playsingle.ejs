@@ -1,18 +1,15 @@
 <div class="page container">
   <% artistBio=artistBio %>
-  <% song=song %>
-  <% artistInfo=artistInfo %>
-  <% include partials/player.ejs %>
+    <% song=song %>
+      <% artistInfo=artistInfo %>
+        <% include partials/player.ejs %>
 </div>
- <script 
-    async 
-    defer 
-    src="https://maps.googleapis.com/maps/api/js?v=3.20&key=AIzaSyDHylimdPIr0Lfc6WzCjS47B7mrNrTQSJ0">
+<script async defer src="https://maps.googleapis.com/maps/api/js?v=3.20&key=AIzaSyDHylimdPIr0Lfc6WzCjS47B7mrNrTQSJ0">
 </script>
 <script>
-setTimeout(function(){ 
-  for (var property in initializeMaps) {
-    initializeMaps[property]();
-  }
-}, 2000);
+  setTimeout(function () {
+    for (var property in initializeMaps) {
+      initializeMaps[property]();
+    }
+  }, 2000);
 </script>

@@ -1,4 +1,4 @@
- <div class="welcome-image">
+<div class="welcome-image">
 </div>
 <div class="welcome-waves">
 </div>
@@ -19,9 +19,9 @@
       </div>
     </div>
     <div class="welcome-features-options">
-    <div class="welcome-features-options-image">
-      <img src="/images/speaker.png" alt="speaker" />
-    </div>
+      <div class="welcome-features-options-image">
+        <img src="/images/speaker.png" alt="speaker" />
+      </div>
       <div class="welcome-features-options-title">
         Find any song
       </div>
@@ -43,28 +43,31 @@
   </div>
 </div>
 
- 
- <div class="form">
-      <ul class="tab-group">
-        <li class="tab active"><a href="/login">Log In</a></li>
-        <li class="tab"><a href="/signup">Sign Up</a></li>
-      </ul>  
-      <div class="tab-content">
-        <div id="login">   
-          <h1>Welcome Back!</h1>
-          <form action="/login" method="POST">
-            <div class="field-wrap">
-            <input placeholder="username" name="username" required/>
-          </div>
-          <div class="field-wrap">
-            <input placeholder="password" name="password" type="password"required/>
-          </div>
-            <% if (typeof message != "undefined") { %>
-            <div class="error-message"><%= message %></div>
-          <% } %>
-          <button type="submit" class="button button-block"/>Log In</button>
-          </form>
+
+<div class="form">
+  <ul class="tab-group">
+    <li class="tab active"><a href="/login">Log In</a></li>
+    <li class="tab"><a href="/signup">Sign Up</a></li>
+  </ul>
+  <div class="tab-content">
+    <div id="login">
+      <h1>Welcome Back!</h1>
+      <form action="/login" method="POST">
+        <div class="field-wrap">
+          <input placeholder="username" name="username" required/>
         </div>
-      </div><!-- tab-content -->
-      
-</div> 
+        <div class="field-wrap">
+          <input placeholder="password" name="password" type="password" required/>
+        </div>
+        <% if (typeof message != "undefined") { %>
+          <div class="error-message">
+            <%= message %>
+          </div>
+          <% } %>
+            <button type="submit" class="button button-block" />Log In</button>
+      </form>
+    </div>
+  </div>
+  <!-- tab-content -->
+
+</div>

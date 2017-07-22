@@ -1,23 +1,19 @@
 <div class="page container">
   <% if (favourites.length > 0) { %>
-  <% favourites.forEach((favourite) => { %>
-  <%  let song = { name: favourite.name, previewUrl: favourite.preview_url, image: favourite.image } %>
-  <%  let artistInfo = { id: favourite.artist_id, name: favourite.artist_name, location: favourite.artist_location, locationLabel: favourite.artist_locationLabel} %>
-  <%  let artistBio = favourite.artist_bio %>
-  <% include partials/player.ejs %>
-  <% }) %>
-  <% } else {%>
-  <div class="empty-page-text">Who would you like to listen next? Add next songs to play and find them here.</div>
-  <% } %>
+    <% favourites.forEach((favourite) => { %>
+      <%  let song = { name: favourite.name, previewUrl: favourite.preview_url, image: favourite.image } %>
+        <%  let artistInfo = { id: favourite.artist_id, name: favourite.artist_name, location: favourite.artist_location, locationLabel: favourite.artist_locationLabel} %>
+          <%  let artistBio = favourite.artist_bio %>
+            <% include partials/player.ejs %>
+              <% }) %>
+                <% } else {%>
+                  <div class="empty-page-text">Who would you like to listen next? Add next songs to play and find them here.</div>
+                  <% } %>
 </div>
- <script
-    async
-    defer
-    src="https://maps.googleapis.com/maps/api/js?v=3.20&key=AIzaSyDHylimdPIr0Lfc6WzCjS47B7mrNrTQSJ0">
+<script async defer src="https://maps.googleapis.com/maps/api/js?v=3.20&key=AIzaSyDHylimdPIr0Lfc6WzCjS47B7mrNrTQSJ0">
 </script>
 <script>
- 
-setTimeout(function(){
+  setTimeout(function () {
     for (var property in initializeMaps) {
       initializeMaps[property]();
     }

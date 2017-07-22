@@ -1,6 +1,6 @@
 <div class="page container">
     <% allSongs.forEach((song) => { %>
-       <form action="/playsingle" method="POST">
+        <form action="/playsingle" method="POST">
             <input type="hidden" name="preview" value="<%= song.preview_url %>">
             <input type="hidden" name="artist" value="<%= song.artists[0].name %>">
             <input type="hidden" name="artistId" value="<%= song.artists[0].id %>">
@@ -9,13 +9,17 @@
             <input type="hidden" name="songImage" value="<%= song.image %>">
             <div class="search-results">
                 <div>
-                    <input type="image" name="submit" class="search-results-play" src="/images/play-button.png"/>
+                    <input type="image" name="submit" class="search-results-play" src="/images/play-button.png" />
                     <input type="image" name="submit" class="search-results-image" src="<%= song.image %>" /></div>
-                    <div class="search-results-details">
-                    <div class="search-results-artist"><%= song.artists[0].name %></div>
-                    <div class="search-results-song"><%= song.name %></div>
+                <div class="search-results-details">
+                    <div class="search-results-artist">
+                        <%= song.artists[0].name %>
+                    </div>
+                    <div class="search-results-song">
+                        <%= song.name %>
+                    </div>
                 </div>
             </div>
         </form>
-   <% }) %>
+        <% }) %>
 </div>

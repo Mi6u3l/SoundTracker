@@ -1,5 +1,4 @@
 /* jshint esversion:6 */
-
 const express = require("express");
 const authRoutes = express.Router();
 const passport = require("passport");
@@ -25,13 +24,19 @@ authRoutes.post("/signup", (req, res, next) => {
   const password = req.body.password;
 
   if (username === "" || password === "") {
-    res.render("authentication/signup", { message: "Indicate username and password" });
+    res.render("authentication/signup", {
+      message: "Indicate username and password"
+    });
     return;
   }
 
-  User.findOne({ username }, "username", (err, user) => {
+  User.findOne({
+    username
+  }, "username", (err, user) => {
     if (user !== null) {
-      res.render("authentication/signup", { message: "The username already exists" });
+      res.render("authentication/signup", {
+        message: "The username already exists"
+      });
       return;
     }
 
@@ -49,10 +54,12 @@ authRoutes.post("/signup", (req, res, next) => {
 
     newUser.save((err) => {
       if (err) {
-        res.render("authentication/signup", { message: "Something went wrong"});
+        res.render("authentication/signup", {
+          message: "Something went wrong"
+        });
       } else {
-         passport.authenticate('local')(req, res, function () {
-         res.redirect('/');
+        passport.authenticate('local')(req, res, function () {
+          res.redirect('/');
         });
       }
     });
@@ -61,7 +68,9 @@ authRoutes.post("/signup", (req, res, next) => {
 
 
 authRoutes.get("/login", (req, res, next) => {
-  res.render("authentication/login", { "message": req.flash("error") });
+  res.render("authentication/login", {
+    "message": req.flash("error")
+  });
 });
 
 authRoutes.post("/login", passport.authenticate("local", {
@@ -75,11 +84,16 @@ authRoutes.post("/login", passport.authenticate("local", {
 authRoutes.get("/logout", (req, res, next) => {
   let username = req.user.username;
   req.session.destroy((err) => {
-    User.findOneAndUpdate({username},{$set: {queue: []}}, (err,user) => {
-      if(err){
-        return next(err);
+    User.findOneAndUpdate({
+      username
+    }, {
+      $set: {
+        queue: []
       }
-      else{
+    }, (err, user) => {
+      if (err) {
+        return next(err);
+      } else {
         console.log("updated");
       }
     });

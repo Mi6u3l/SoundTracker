@@ -1,17 +1,19 @@
 <div class="page container">
   <div class="followed">
-  <% if (allAlbums ) { %>
-  <% allAlbums.forEach((element) => { %>
-    <% element.forEach((el) => { %>
-    <div class="followed-albums">
-      <a href="/followed/individual?albumId=<%= el.id %>">
+    <% if (allAlbums ) { %>
+      <% allAlbums.forEach((element) => { %>
+        <% element.forEach((el) => { %>
+          <div class="followed-albums">
+            <a href="/followed/individual?albumId=<%= el.id %>">
         <img src="<%= el.image%>"/> 
       </a>
-    </div>
-<% }) %>
+          </div>
+          <% }) %>
   </div>
-<% }) %>
-<% } else {%>
-  <div class="empty-page history"><div class="empty-page-text">You are not following any artist, yet...</div></div>
-  <% } %>
+  <% }) %>
+    <% } else {%>
+      <div class="empty-page history">
+        <div class="empty-page-text">You are not following any artist, yet...</div>
+      </div>
+      <% } %>
 </div>

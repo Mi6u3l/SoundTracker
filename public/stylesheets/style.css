@@ -1,15 +1,15 @@
 .body {
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 14px;
     line-height: 1.42857143;
     color: #333;
     background-color: #fff;
-    margin:0;
+    margin: 0;
     margin-bottom: 60px;
 }
 
 .page {
-  padding-top: 100px !important;
+    padding-top: 100px !important;
 }
 
 .search-box {
@@ -21,22 +21,19 @@
     border-radius: 0px;
 }
 
-
 .header-wrapper {
-  display: inline;
-  width: 100%;
+    display: inline;
+    width: 100%;
 }
 
 .custom-search-input {
-  display: inline-flex;
-  padding-left: 130px;
+    display: inline-flex;
+    padding-left: 130px;
 }
-
 
 .title a {
     font-size: 26px;
 }
-
 
 .logged-user {
     padding-top: 10px;
@@ -47,12 +44,12 @@
 }
 
 .artist-map {
-  height: 300px;
-  width: 100%
+    height: 300px;
+    width: 100%
 }
 
 .artists-dialog {
-  width: 80%;
+    width: 80%;
 }
 
 .error-message {
@@ -62,7 +59,7 @@
     top: 342px;
 }
 
-.navbar-default { 
+.navbar-default {
     background-color: #32abdd;
     color: #fff;
     height: 100px;
@@ -73,18 +70,18 @@
 }
 
 .search-button {
-  background-color: #1ab188;
-  border-color: #1ab188;
-  display: none;
+    background-color: #1ab188;
+    border-color: #1ab188;
+    display: none;
 }
 
 .footer-button {
     height: 45px;
     width: 130px;
     background-color: #1ab188;
-    color:#fff;
+    color: #fff;
     border: none;
-    outline:none;
+    outline: none;
     margin-left: 30px;
     text-transform: uppercase;
 }
@@ -101,7 +98,6 @@
     height: 28px;
 }
 
-
 .menu a {
     float: right;
     color: #fff;
@@ -114,21 +110,19 @@
     text-decoration: none;
 }
 
-
 .menu-options {
     float: right;
     padding-top: 15px;
     font-size: 17px;
 }
 
-.menu-options span{
+.menu-options span {
     margin-left: 10px;
 }
 
 .menu-active {
     border-bottom: solid 2px;
 }
-
 
 .welcome-image {
     background-image: url(/images/image.png);
@@ -145,7 +139,6 @@
     background-size: cover;
     margin-top: -200px;
     background-position-y: 254px;
-    
 }
 
 .welcome-features-title {
@@ -175,7 +168,6 @@
     text-align: center;
     width: 100%;
 }
-
 
 .welcome-features-options {
     display: inline-block;
@@ -221,19 +213,15 @@
     border: none;
     margin-top: 50px;
     left: 166px;
-
 }
 
 .player {
     margin-top: 20px;
     margin-left: 100px;
     display: inline-flex;
-
 }
 
-.player-image {
-
-}
+.player-image {}
 
 .player-audio {
     margin-left: 30px;
@@ -262,7 +250,7 @@
 }
 
 .player-options a {
-    color:#000;
+    color: #000;
     margin-right: 14px;
 }
 
@@ -276,14 +264,11 @@
     border: none;
 }
 
-.followed {
-    
-}
+.followed {}
 
 .followed-albums {
     float: left;
     margin: 25px;
-
 }
 
 .followed-albums img {
@@ -293,7 +278,6 @@
 .songs-album {
     text-align: center;
     padding-top: 20px;
-
 }
 
 .user-icon {
@@ -327,7 +311,6 @@
     background-image: url(/images/queue.png);
     background-size: 100%;
 }
-
 
 .navbar-brand {
     padding: 0px 15px;
