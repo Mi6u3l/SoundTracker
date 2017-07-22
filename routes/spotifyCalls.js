@@ -217,10 +217,7 @@ router.get("/followed",  ensureLogin.ensureLoggedIn(), (req, res, next) => {
           }));
       });
       axios.all(promises).then(function (data) {
-        res.render("followed", {
-          username: req.user.username,
-          allAlbums
-        });
+        res.render("followed", {username: req.user.username, allAlbums });
       });
     }
   });
