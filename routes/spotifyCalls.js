@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require("../models/user");
+const ensureLogin = require("connect-ensure-login");
 const Song = require("../models/song");
 const dotenv = require("dotenv").config();
 const axios = require("axios");
@@ -58,7 +59,7 @@ function checkDuplicateLists(database, add) {
 
 
 // Retrieve information about the song the user searches
-router.get("/getSong", (req, res, next) => {
+router.get("/getSong", ensureLogin.ensureLoggedIn(), (req, res, next) => {
   let search = req.query.song;
   spotifyApi.searchTracks(search)
     .then(function (data) {
@@ -105,7 +106,7 @@ router.get("/getSong", (req, res, next) => {
 });
 
 //do post
-router.post("/favourites/new", (req, res, next) => {
+router.post("/favourites/new", ensureLogin.ensureLoggedIn(), (req, res, next) => {
   let username = req.user.username;
   let action = "added to";
   const songObject = {
@@ -148,7 +149,7 @@ router.post("/favourites/new", (req, res, next) => {
   });
 });
 
-router.post("/queue/new", (req, res, next) => {
+router.post("/queue/new", ensureLogin.ensureLoggedIn(), (req, res, next) => {
   var action = true;
   const songObject = {
     name: req.body.info.songName,
@@ -183,7 +184,7 @@ function parseArtists(myArray) {
   return returnArray;
 }
 
-router.get("/followed", (req, res, next) => {
+router.get("/followed",  ensureLogin.ensureLoggedIn(), (req, res, next) => {
   let username = req.user.username;
   let allAlbums = [];
   User.findOne({
@@ -227,7 +228,7 @@ router.get("/followed", (req, res, next) => {
 
 
 
-router.get("/followed/individual", (req, res, next) => {
+router.get("/followed/individual", ensureLogin.ensureLoggedIn(), (req, res, next) => {
   let albumId = req.query.albumId;
   let tracksArray = [];
   spotifyApi.getAlbumTracks(albumId, {
@@ -255,7 +256,7 @@ router.get("/followed/individual", (req, res, next) => {
 });
 
 
-router.post("/artist/new", (req, res, next) => {
+router.post("/artist/new",  ensureLogin.ensureLoggedIn(), (req, res, next) => {
   let id_artist = req.body.info.artistId;
   let username = req.user.username;
   let action = "following";

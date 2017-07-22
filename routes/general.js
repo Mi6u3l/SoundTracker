@@ -141,7 +141,7 @@ router.get("/history",  ensureLogin.ensureLoggedIn(),(req,res,next) => {
 });
 
 //Render queue
-router.get("/queue",(req,res,next) => {
+router.get("/queue", ensureLogin.ensureLoggedIn(),(req,res,next) => {
   let queue = req.session.myQueue;
   res.render("queue", {username: req.user.username, queue });
  });
