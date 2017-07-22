@@ -59,7 +59,7 @@ function checkDuplicateLists(database, add) {
 
 
 // Retrieve information about the song the user searches
-router.get("/getSong", ensureLogin.ensureLoggedIn(), (req, res, next) => {
+router.get("/getSong", (req, res, next) => {
   let search = req.query.song;
   spotifyApi.searchTracks(search)
     .then(function (data) {
