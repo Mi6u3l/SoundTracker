@@ -29,3 +29,11 @@ bower_components
 
 # Debug log from npm
 npm-debug.log
+
+# misc
+.DS_Store
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
